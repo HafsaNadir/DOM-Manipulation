@@ -8,7 +8,7 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
-const handler = () => {
+const rollHandler = () => {
     var dice = Math.floor(Math.random()*6) + 1
     var diceDOM = document.querySelector('.dice')
     diceDOM.style.display = 'block'
@@ -21,17 +21,26 @@ const handler = () => {
     }
     else
     {
-        document.getElementById('score-' + activePlayer).textContent = roundScore
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
-        roundScore = 0
-        document.querySelector('#current-0').textContent = 0
-        document.querySelector('#current-1').textContent = 0
-        
-        document.querySelector('.player-0-panel').classList.toggle('active')
-        document.querySelector('.player-1-panel').classList.toggle('active')
-
-        document.querySelector('.dice').style.display= 'none'
+        nextPlayer()
     }
+}
+
+const holdHandler = () => {
+    scores[activePlayer] += roundScore
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+    nextPlayer()
+}
+
+const nextPlayer = () => {
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
+    roundScore = 0
+    document.querySelector('#current-0').textContent = 0
+    document.querySelector('#current-1').textContent = 0
+    
+    document.querySelector('.player-0-panel').classList.toggle('active')
+    document.querySelector('.player-1-panel').classList.toggle('active')
+
+    document.querySelector('.dice').style.display= 'none'
 }
 
 let scores, roundScore, activePlayer
@@ -44,8 +53,8 @@ document.getElementById('current-0').textContent = 0
 document.getElementById('current-1').textContent = 0
 document.getElementById('score-0').textContent = 0
 document.getElementById('score-1').textContent = 0
-document.querySelector('.btn-roll').addEventListener('click' , handler)
-
+document.querySelector('.btn-roll').addEventListener('click' , rollHandler)
+document.querySelector('.btn-hold').addEventListener('click' , holdHandler)
 
 
 
