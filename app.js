@@ -8,16 +8,31 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+const handler = () => {
+    var dice = Math.floor(Math.random()*6) + 1
+    var diceDOM = document.querySelector('.dice')
+    diceDOM.style.display = 'block'
+    diceDOM.src = 'dice-' + dice + '.png'
+}
 
-let scores, roundScore, activePlayer, dice
+let scores, roundScore, activePlayer
 scores = [0,0] 
 roundScore = 0
 activePlayer = 0
 
-dice = Math.floor(Math.random()*6) + 1
-document.querySelector('#current-' + activePlayer).textContent = dice
+document.querySelector('.dice').style.display = 'none'
 
-let x = document.querySelector('#score-0').textContent 
-console.log(x)
+document.getElementById('score-0').textContent = 0
+document.getElementById('score-1').textContent = 0
+document.getElementById('current-0').textContent = 0
+document.getElementById('current-1').textContent = 0
 
-document.querySelector('.dice').style.display = "none"
+document.querySelector('.btn-roll').addEventListener('click' , handler)
+
+
+
+
+// document.querySelector('#current-' + activePlayer).textContent = dice
+
+// let x = document.querySelector('#score-0').textContent 
+// console.log(x)
